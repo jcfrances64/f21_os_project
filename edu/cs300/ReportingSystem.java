@@ -82,29 +82,15 @@ class ReportThread extends Thread {
 
 			}
 
-			// file.close();
-				
-			// 	System.out.println(columnList.get(i).columnName + " " + columnList.get(i).leftBound + " " + columnList.get(i).rightBound);
-			// 	System.out.println("ThreadID: " + threadID);
-			// }
-			
+	
 
 		} catch (FileNotFoundException ex) {
 			System.out.println("FileNotFoundException triggered:"+ex.getMessage());
 		}
 
-		// file.close();
-		
-		// if(threadID == 1) {
-
-			
-			// for(int i = 0; i < index; i++) {
-
-		// if(true) {	//eliminate later
+	
 		try {
-			
-			// MessageJNI.writeReportRequest(5, 1,"test");
-			// System.out.println(MessageJNI.readReportRecord(1));
+
 			MessageJNI.writeReportRequest(threadID, reportCount, searchString);
 
 
@@ -134,15 +120,11 @@ class ReportThread extends Thread {
 
 		
 
-		// System.out.println("ThreadID " + threadID + " has " + records.size() + " reports");
-		// for(int i = 0; i < records.size(); i++) {
-		// 	System.out.println("From records vector: " + records.get(i));
-		// }
 
-		String 
+		String tempFileName = "Thread" + threadID + ".rpt"; //delete later and use the filename specified in report
 
 		try {
-			File outputFile = new File("Thread" + threadID + ".rpt");
+			File outputFile = new File(tempFileName);
 
 			if(outputFile.createNewFile()) {
 				// fprintf(stderr, "Report File: %s created\n" + outputFileName);
@@ -160,11 +142,34 @@ class ReportThread extends Thread {
 		}
 
 		try {
+			FileWriter outputFile = new FileWriter(tempFileName);
+
+			String recordString;
+			String writeString;
+
+			for(int i = 0; i < records.size(); i++) {
+				writeString = "";
+				recordString = records.get(i);
+
+				for(int j = 0; j < columnList.size(); j++) {
+
+					// writeString += recordString.substring(columnList.get(j).leftBound, columnList.get(i).rightBound);
+
+					
+
+				}
+			}
+
+			System.out.println("Output file for thread " + threadID + " written!");
+
+			outputFile.close();
+
+
 
 			
 
 		} catch(Exception e) {
-			System.err.println("Error: " + e)
+			System.err.println("Error: " + e);
 		}
 
 
