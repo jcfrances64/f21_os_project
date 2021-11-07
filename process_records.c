@@ -25,6 +25,7 @@ int main(int argc, char**argv)
     }
     msqid = msgget(key, msgflg);
     int ret = msgrcv(msqid, &rbuf, sizeof(rbuf), 1, 0);
+    
     char searchString[SEARCH_STRING_FIELD_LENGTH];
     strcpy(searchString, rbuf.search_string);
     
@@ -51,40 +52,40 @@ int main(int argc, char**argv)
 
         sbuf.mtype = 2;
 
-            while(strcmp(str, "\n") != 0) {
-                if(strstr(str, searchString)) {
-                    strcpy(sbuf.record, str);
-                    printf("Entered if\n");
-                    buf_length = strlen(sbuf.record) + sizeof(int) + 1;
-                    msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT); //implement thread to send this message
-                }
-                fgets(str, RECORD_FIELD_LENGTH, f);
+        while(strcmp(str, "\n") != 0) {
+            if(strstr(str, searchString)) {
+                strcpy(sbuf.record, str);
+                printf("Entered if\n");
+                buf_length = strlen(sbuf.record) + sizeof(int) + 1;
+                msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT); //implement thread to send this message
+            }
+            fgets(str, RECORD_FIELD_LENGTH, f);
+
+        }
+
+        strcpy(sbuf.record, "");
+        printf("Empty String\n");
+        buf_length = strlen(sbuf.record) + sizeof(int) + 1;
+        msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT);
+
+        if(i == (threadCount - 1)) {
+            break;
+        }
+
+
+        key = ftok(FILE_IN_HOME_DIR,QUEUE_NUMBER);
+        msqid = msgget(key, msgflg);
+
+        int ret = msgrcv(msqid, &rbuf, sizeof(rbuf), 1, 0);
+        strcpy(searchString, rbuf.search_string);
+
+        int j;
+        int k;
+        for(j = 0; j < 1000; j++) {
+            for(k = 0; k < 1000; k++) {
 
             }
-
-            strcpy(sbuf.record, "");
-            printf("Empty String\n");
-            buf_length = strlen(sbuf.record) + sizeof(int) + 1;
-            msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT);
-
-            if(i == (threadCount - 1)) {
-                break;
-            }
-
-
-            key = ftok(FILE_IN_HOME_DIR,QUEUE_NUMBER);
-            msqid = msgget(key, msgflg);
-
-            int ret = msgrcv(msqid, &rbuf, sizeof(rbuf), 1, 0);
-            strcpy(searchString, rbuf.search_string);
-
-            int j;
-            int k;
-            for(j = 0; j < 1000; j++) {
-                for(k = 0; k < 1000; k++) {
-
-                }
-            }
+        }
 
     }
     

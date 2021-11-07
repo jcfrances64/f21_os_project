@@ -123,23 +123,54 @@ class ReportThread extends Thread {
 
 		String tempFileName = "Thread" + threadID + ".rpt"; //delete later and use the filename specified in report
 
-		try {
-			File outputFile = new File(tempFileName);
+		// try {
+		// 	File outputFile = new File(tempFileName);
 
-			if(outputFile.createNewFile()) {
-				// fprintf(stderr, "Report File: %s created\n" + outputFileName);
-				System.out.println("Report File: %s created\n" + outputFileName);
-			} else {
-				System.err.println("Error: File already exists\n");
-				// throw new FileNotFoundException;
+		// 	if(outputFile.exists()) {
+
+		// 	}
+
+		// 	if(outputFile.createNewFile()) {
+		// 		// fprintf(stderr, "Report File: %s created\n" + outputFileName);
+		// 		System.out.println("Report File: " + tempFileName + " created\n" + outputFileName);
+		// 	} else {
+		// 		System.err.println("Error: File already exists\n");
+		// 		// throw new FileNotFoundException;
+		// 	}
+		// 	// outputFile.close();
+
+
+
+		// } catch(Exception e) {
+		// 	System.err.println("Error: " + e);
+		// }
+
+		/** 
+		if(threadID == 2) {
+			System.out.println("columnList size " + columnList.size());
+			String testRecord = records.get(0);
+			System.out.println(testRecord);
+			for(int j = 0; j < columnList.size(); j++) {
+				System.out.println(j + " Left: " + columnList.get(j).leftBound + " Right: " + columnList.get(j).rightBound);
 			}
-			// outputFile.close();
+			for(int i = 0; i < testRecord.length(); i++) {
+				System.out.println("Index: " + i +  " character: " + testRecord.charAt(i));
+			}
+			String writeString = "";
+			for(int j = 0; j < columnList.size(); j++) {
 
+				writeString = writeString.concat(testRecord.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "  ");
+				// writeString = writeString.concat("test");
+				// System.out.println(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(i).rightBound - 1));
+				// System.out.println("TID " + threadID+ " Left: " + columnList.get(j).leftBound + " Right: " + columnList.get(j).rightBound);
 
+				
 
-		} catch(Exception e) {
-			System.err.println("Error: " + e);
-		}
+			}
+
+			System.out.println(testRecord.substring(columnList.get(0).leftBound - 1, columnList.get(0).rightBound - 1));
+			System.out.println("Write String: " + writeString);
+		} */
 
 		try {
 			FileWriter outputFile = new FileWriter(tempFileName);
@@ -147,17 +178,33 @@ class ReportThread extends Thread {
 			String recordString;
 			String writeString;
 
+			outputFile.write(title + "\n");
+
+			writeString = "";
+			for(int i = 0; i < columnList.size(); i++) {
+				writeString = writeString.concat(columnList.get(i).columnName + "\t");
+			}
+			outputFile.write(writeString + "\n");
+
 			for(int i = 0; i < records.size(); i++) {
 				writeString = "";
 				recordString = records.get(i);
+				System.out.println("In for loop for thread " + threadID + " " + recordString);
+				
+				
 
 				for(int j = 0; j < columnList.size(); j++) {
 
-					// writeString += recordString.substring(columnList.get(j).leftBound, columnList.get(i).rightBound);
+					writeString = writeString.concat(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "  ");
+					// writeString = writeString.concat("test");
+					// System.out.println(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(i).rightBound - 1));
+					// System.out.println("TID " + threadID+ " Left: " + columnList.get(j).leftBound + " Right: " + columnList.get(j).rightBound);
 
 					
 
 				}
+
+				outputFile.write(writeString + "\t\n");
 			}
 
 			System.out.println("Output file for thread " + threadID + " written!");
@@ -169,7 +216,7 @@ class ReportThread extends Thread {
 			
 
 		} catch(Exception e) {
-			System.err.println("Error: " + e);
+			System.out.println("Error: " + e);
 		}
 
 
