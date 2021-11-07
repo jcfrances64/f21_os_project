@@ -173,19 +173,25 @@ class ReportThread extends Thread {
 		} */
 
 		try {
-			FileWriter outputFile = new FileWriter(tempFileName);
+			FileWriter outputFile = new FileWriter(tempFileName);	//	update later to include
 
 			String recordString;
 			String writeString;
 
+			//	write title to file
 			outputFile.write(title + "\n");
 
 			writeString = "";
+			
+
+			//	writing column names to file
 			for(int i = 0; i < columnList.size(); i++) {
 				writeString = writeString.concat(columnList.get(i).columnName + "\t");
 			}
 			outputFile.write(writeString + "\n");
 
+
+			//	
 			for(int i = 0; i < records.size(); i++) {
 				writeString = "";
 				recordString = records.get(i);
@@ -195,7 +201,8 @@ class ReportThread extends Thread {
 
 				for(int j = 0; j < columnList.size(); j++) {
 
-					writeString = writeString.concat(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "  ");
+					writeString = writeString.concat(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "\t");
+					// outputFile.write(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "\t");
 					// writeString = writeString.concat("test");
 					// System.out.println(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(i).rightBound - 1));
 					// System.out.println("TID " + threadID+ " Left: " + columnList.get(j).leftBound + " Right: " + columnList.get(j).rightBound);
@@ -204,7 +211,8 @@ class ReportThread extends Thread {
 
 				}
 
-				outputFile.write(writeString + "\t\n");
+				outputFile.write(writeString + "\n");
+				// outputFile.write("\n");
 			}
 
 			System.out.println("Output file for thread " + threadID + " written!");
