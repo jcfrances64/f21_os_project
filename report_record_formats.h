@@ -21,7 +21,7 @@ typedef struct reportrequestbuf {
 //Report record
 
 typedef struct reportrecordbuf {
-	long mtype;
+	  long mtype;
 	  char record[RECORD_FIELD_LENGTH];
 } report_record_buf;
 #endif

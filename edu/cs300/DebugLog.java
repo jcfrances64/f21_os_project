@@ -13,4 +13,4 @@ public class DebugLog {
         System.err.println(className + "." + methodName + "():" + lineNumber+" "+ message);
     }
   }
-} //edit
+}
