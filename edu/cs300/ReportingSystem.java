@@ -172,7 +172,7 @@ class ReportThread extends Thread {
 			System.out.println("Write String: " + writeString);
 		} */
 
-		try {
+		try { //test commit
 			FileWriter outputFile = new FileWriter(tempFileName);	//	update later to include
 
 			String recordString;
