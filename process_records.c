@@ -27,8 +27,6 @@ typedef struct countStructure {
 
 static void signalHandler(int sig) {
     pthread_cond_signal(&cv);
-    signal(SIGINT, signalHandler);
-
 }
 
 void *printStatusReport(void *args) {
@@ -58,6 +56,17 @@ void *printStatusReport(void *args) {
 
 
 
+}
+
+void finalStatusReportPrint(countStruct * reportCounts) {
+
+
+    printf("***Report***\n");
+    printf("%i records read for %i reports\n", reportCounts[0].totalRecordCount, reportCounts[0].threadCount);
+    int i;
+    for(i = 0; i < reportCounts[0].threadCount; i++) {
+        printf("Records sent for report index %i: %i\n", reportCounts[i].threadID, reportCounts[i].recordCount);
+    }
 }
 
 
@@ -130,7 +139,9 @@ int main(int argc, char**argv) {
 
         currentThread = rbuf.report_idx;
         
+        //  0 index of array holds the values for the report creator
         reportCountStruct[0].threadCount = threadCount;
+        //  used the current thread as an index so the threads were in order to simplify the report
         reportCountStruct[currentThread - 1].threadID = rbuf.report_idx;
         strcpy(reportCountStruct[currentThread - 1].searchString, rbuf.search_string);
 
@@ -140,14 +151,11 @@ int main(int argc, char**argv) {
     } while(threadIndex > 0);
 
 
-
-    // start status report thread
+    //  thread creation also refer to comment at the end of main()
     pthread_t statusReportThread;
-    signal(SIGINT, signalHandler);
     pthread_create(&statusReportThread, NULL, printStatusReport, (void *)reportCountStruct);
-
-
-
+    signal(SIGINT, signalHandler);
+    
 
 
     //  retrieve records
@@ -253,15 +261,22 @@ int main(int argc, char**argv) {
 
     }
 
+    finalStatusReportPrint(reportCountStruct);  //  just using this to manually print after not being able to figure it out
 
     
     sem_wait(&sem);
-    pthread_mutex_unlock(&mutex);
-    pthread_cond_signal(&cv);
+    
+    pthread_cond_signal(&cv);   // condition signal
+    // signalHandler(0);
 
-    pthread_join(statusReportThread, NULL);
-   
+    // pthread_join(statusReportThread, NULL);      //  this program would not run correctly 100% of the time, with pthread_join implemented
+                                                    //  the thread waits for the condition but the condition signal
+                                                    //  here didnt work but the signal in sigint did
+                                                    
+                                                
+                                                    
     reportCountStruct = malloc(threadCount * sizeof(countStruct));
+
 
     free(reportCountStruct);
 
