@@ -1,4 +1,19 @@
-msgget: msgget succeeded: msgqid = 138379362
-msgget: msgget succeeded: msgqid = 138379362
+msgget: msgget succeeded: msgqid = 153714755
+msgget: msgget succeeded: msgqid = 153714755
 Error initializing count structure
-a.out: malloc.c:2399: sysmalloc: Assertion `(old_top == (((mbinptr) (((char *) &((av)->bins[((1) - 1) * 2])) - __builtin_offsetof (struct malloc_chunk, fd)))) && old_size == 0) || ((unsigned long) (old_size) >= (unsigned long)((((__builtin_offsetof (struct malloc_chunk, fd_nextsize))+((2 *(sizeof(size_t))) - 1)) & ~((2 *(sizeof(size_t))) - 1))) && ((old_top)->size & 0x1) && ((unsigned long) old_end & (pagesize - 1)) == 0)' failed.
+msgget: msgget succeeded: msgqid = 150241452
+msgsnd-report_record: record"09/22/21  Windshield   Repair  H Peck      JJDoe   $400  1.5   $60    $460   
+" Sent (83 bytes)
+msgget: msgget succeeded: msgqid = 150241452
+msgsnd-report_record: record"09/22/21  Wipers       Purchas H Peck      NA      $36   0     $0     $36  
+" Sent (81 bytes)
+msgget: msgget succeeded: msgqid = 137855147
+msgsnd-report_record: record"09/22/21  Wipers       Purchas H Peck      NA      $36   0     $0     $36  
+" Sent (81 bytes)
+msgget: msgget succeeded: msgqid = 137855147
+msgsnd-report_record: record"09/23/21  Air Freshnr  Purchas J Thorn     SSmith  $12   0     $0     $12    
+" Sent (83 bytes)
+msgget: msgget succeeded: msgqid = 150241452
+msgsnd-report_record: record"" Sent (5 bytes)
+msgget: msgget succeeded: msgqid = 137855147
+msgsnd-report_record: record"" Sent (5 bytes)
