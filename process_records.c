@@ -90,10 +90,12 @@ int main(int argc, char**argv)
         // sbuf.mtype = 2;
         char record[RECORD_FIELD_LENGTH]; // was str
         // fgets(record, RECORD_FIELD_LENGTH, recordFile);
+        //     while(strcmp(str, "\n") != 0) {
+        //         if(strstr(str, searchString)) {
 
         do {
             fgets(record, RECORD_FIELD_LENGTH, recordFile);
-            if(strstr(record, "\n") != 0) {
+            if(strstr(record, "searchString") != 0) {
                 strcpy(sbuf.record, record);
                 printf("Entered if for thread%i\n", threadCount);
                 buf_length = strlen(sbuf.record) + sizeof(int) + 1;
@@ -111,8 +113,30 @@ int main(int argc, char**argv)
             }
         } while(strcmp(record, "\n") != 0);
 
-
         
+        sbuf.mtype = 2;
+        // sbuf.record[0]=0;
+        strcpy(sbuf.record, "");
+        buf_length = strlen(sbuf.record) + sizeof(int)+1;//struct size without
+        // Send a message.
+        if((msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT)) < 0) {
+            int errnum = errno;
+            fprintf(stderr,"%d, %ld, %s, %d\n", msqid, sbuf.mtype, sbuf.record, (int)buf_length);
+            perror("(msgsnd)");
+            fprintf(stderr, "Error sending msg: %s\n", strerror( errnum ));
+            exit(1);
+        }
+        else
+            fprintf(stderr,"msgsnd-report_record: record\"%s\" Sent (%d bytes)\n", sbuf.record,(int)buf_length);
+
+        threadCount--;
+
+
+    } while(threadCount > 0);
+
+
+
+            
 
         // while(strcmp(record, "\n") != 0) {
         //     if(strstr(str, searchString)) {
@@ -140,12 +164,6 @@ int main(int argc, char**argv)
 
         // int ret = msgrcv(msqid, &rbuf, sizeof(rbuf), 1, 0);
         // strcpy(searchString, rbuf.search_string);
-
-
-
-
-
-    } while(threadCount > 0);
 
 
 
