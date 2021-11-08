@@ -39,17 +39,21 @@ int main(void) {
     //     }
     // }
 
-    char test[81];
-    strcpy(test, "asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf");
-    printf("%s\n", test);
-    test[0] = 0;
-    if(strcmp(test, "\0") == 0) {
-        // printf("Size %i\n" +)
-        printf("%sNULL\n", test);
-    } else {
-        printf("%sNOTNULL\n", test);
+    // char test[81];
+    // strcpy(test, "asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf");
+    // printf("%s\n", test);
+    // test[0] = 0;
+    // if(strcmp(test, "\0") == 0) {
+    //     // printf("Size %i\n" +)
+    //     printf("%sNULL\n", test);
+    // } else {
+    //     printf("%sNOTNULL\n", test);
 
-    }
+    // }
+    // int i;
+
+    // &i = malloc(sizeof(int));
+
 
     // int i;
 

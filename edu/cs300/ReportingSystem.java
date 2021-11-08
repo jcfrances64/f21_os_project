@@ -104,15 +104,6 @@ class ReportThread extends Thread {
 		}
 	
 		
-
-		
-
-
-		// String tempFileName = "Thread" + threadID + ".rpt"; //delete later and use the filename specified in report
-		
-		
-		
-		
 		// write to file	
 		try {
 			// FileWriter outputFile = new FileWriter(tempFileName);	//	update later to include
@@ -147,10 +138,6 @@ class ReportThread extends Thread {
 		} catch(Exception e) {
 			System.out.println("Error: " + e);
 		} 
-
-
-
-		
 
 
 	}
