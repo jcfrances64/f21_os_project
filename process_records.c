@@ -63,8 +63,6 @@ int main(int argc, char**argv)
         }
 
         threadIndex = rbuf.report_idx;
-        printf("threadIndex: %i\n", threadIndex);
-
 
         strcpy(searchString, rbuf.search_string);
 
@@ -87,11 +85,8 @@ int main(int argc, char**argv)
 
 
         FILE *recordFile = fopen("records.mini", "r");   //  change to be the value from stdin, was f
-        // sbuf.mtype = 2;
+        sbuf.mtype = 2; //  used to exist in do while
         char record[RECORD_FIELD_LENGTH]; // was str
-        // fgets(record, RECORD_FIELD_LENGTH, recordFile);
-        //     while(strcmp(str, "\n") != 0) {
-        //         if(strstr(str, searchString)) {
 
         do {
             fgets(record, RECORD_FIELD_LENGTH, recordFile);
@@ -99,7 +94,7 @@ int main(int argc, char**argv)
                 strcpy(sbuf.record, record);
                 // printf("Entered if for thread%i\n", threadCount);
                 buf_length = strlen(sbuf.record) + sizeof(int) + 1;
-                sbuf.mtype = 2;
+                // sbuf.mtype = 2;
                 //  send message
                 if((msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT)) < 0) {
                     int errnum = errno;
@@ -134,112 +129,6 @@ int main(int argc, char**argv)
 
 
     } while(threadCount > 0);
-
-
-
-            
-
-        // while(strcmp(record, "\n") != 0) {
-        //     if(strstr(str, searchString)) {
-        //         strcpy(sbuf.record, str);
-        //         printf("Entered if\n");
-        //         buf_length = strlen(sbuf.record) + sizeof(int) + 1;
-        //         msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT); //implement thread to send this message
-        //     }
-        //     fgets(str, RECORD_FIELD_LENGTH, f);
-
-        // }
-
-        // strcpy(sbuf.record, "");
-        // printf("Empty String\n");
-        // buf_length = strlen(sbuf.record) + sizeof(int) + 1;
-        // msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT);
-
-        // if(i == (threadCount - 1)) {
-        //     break;
-        // }
-
-
-        // key = ftok(FILE_IN_HOME_DIR,QUEUE_NUMBER);
-        // msqid = msgget(key, msgflg);
-
-        // int ret = msgrcv(msqid, &rbuf, sizeof(rbuf), 1, 0);
-        // strcpy(searchString, rbuf.search_string);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // msqid = msgget(key, msgflg);
-    // int ret = msgrcv(msqid, &rbuf, sizeof(rbuf), 1, 0);
-    
-    // char searchString[SEARCH_STRING_FIELD_LENGTH];
-    // strcpy(searchString, rbuf.search_string);
-    
-
-
-    // int i;
-    // int threadCount = rbuf.report_count;
-    // // printf("Thread Count: %i", threadCount);
-
-    
-    // for(i = 0; i < threadCount; i++) {
-
-    //     int index = rbuf.report_idx;
-    //     printf("index: %i\n", index);
-
-    //     key = ftok(FILE_IN_HOME_DIR, index);
-    //     msqid = msgget(key, msgflg);
-
-
-    //     FILE *f = fopen("records.mini", "r");
-    //     char str[RECORD_FIELD_LENGTH];
-    //     fgets(str, RECORD_FIELD_LENGTH, f);
-
-
-    //     sbuf.mtype = 2;
-
-    //     while(strcmp(str, "\n") != 0) {
-    //         if(strstr(str, searchString)) {
-    //             strcpy(sbuf.record, str);
-    //             printf("Entered if\n");
-    //             buf_length = strlen(sbuf.record) + sizeof(int) + 1;
-    //             msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT); //implement thread to send this message
-    //         }
-    //         fgets(str, RECORD_FIELD_LENGTH, f);
-
-    //     }
-
-    //     strcpy(sbuf.record, "");
-    //     printf("Empty String\n");
-    //     buf_length = strlen(sbuf.record) + sizeof(int) + 1;
-    //     msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT);
-
-    //     if(i == (threadCount - 1)) {
-    //         break;
-    //     }
-
-
-    //     key = ftok(FILE_IN_HOME_DIR,QUEUE_NUMBER);
-    //     msqid = msgget(key, msgflg);
-
-    //     int ret = msgrcv(msqid, &rbuf, sizeof(rbuf), 1, 0);
-    //     strcpy(searchString, rbuf.search_string);
-
-    // }
 
     exit(0);
 }

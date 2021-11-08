@@ -45,7 +45,7 @@ class ReportThread extends Thread {
 	@Override
 	public void run() {
 		
-		int index = 0;
+		// int index = 0;
 		try {
 			File file = new File(filePath);
 			Scanner report = new Scanner(file);
@@ -76,39 +76,27 @@ class ReportThread extends Thread {
 
 				columnList.add(newColumn); // report parameter to vector
 
-				index++;
-			
-
-
-			}
-
-	
+				// index++;
+			}	
 
 		} catch (FileNotFoundException ex) {
 			System.out.println("FileNotFoundException triggered:"+ex.getMessage());
 		}
 
-	
+		
+
+		//	send report request and recieve records back
 		try {
 
+			//	send report request
 			MessageJNI.writeReportRequest(threadID, reportCount, searchString);
 
+			//	keeps string that holds the current record being read in
+			String reportRecord;
 
-			String reportRecord;	// = MessageJNI.readReportRecord(1);
-
-			// int j = 1;
-			// System.out.print(threadID + " Record: ");
-			reportRecord = MessageJNI.readReportRecord(threadID);
-			records.add(reportRecord);
-			// System.out.println("Thread " + threadID + " " + reportRecord);
-			while(reportRecord != null) {
-				// j++;
-				reportRecord = MessageJNI.readReportRecord(threadID);
-				if(!(reportRecord.length() > 1)) {
-					break;
-				}
-				records.add(reportRecord);
-
+			//	reads records and adds them to records vector until empty string is sent
+			while(!((reportRecord = MessageJNI.readReportRecord(threadID)).isEmpty())) {
+				records.add(reportRecord);				
 			}
 
 		} catch (Exception e) {
@@ -120,57 +108,41 @@ class ReportThread extends Thread {
 		
 
 
-		String tempFileName = "Thread" + threadID + ".rpt"; //delete later and use the filename specified in report
-
+		// String tempFileName = "Thread" + threadID + ".rpt"; //delete later and use the filename specified in report
 		
 		
 		
-		// write to file
 		
-		try { //test commit
-			FileWriter outputFile = new FileWriter(tempFileName);	//	update later to include
-
+		// write to file	
+		try {
+			// FileWriter outputFile = new FileWriter(tempFileName);	//	update later to include
+			FileWriter outputFile = new FileWriter(outputFileName);
 			String recordString;
-			String writeString;
 
 			//	write title to file
 			outputFile.write(title + "\n");
 
-			writeString = "";
-			
-
 			//	writing column names to file
 			for(int i = 0; i < columnList.size(); i++) {
-				writeString = writeString.concat(columnList.get(i).columnName + "\t");
+				// writeString = writeString.concat(columnList.get(i).columnName + "\t");
+				outputFile.write(columnList.get(i).columnName + "\t");
 			}
-			outputFile.write(writeString + "\n");
+			// outputFile.write(writeString + "\n");
+			outputFile.write("\n");
 
 
-			//	
+			//	for loop for iterate through records
 			for(int i = 0; i < records.size(); i++) {
-				writeString = "";
+
 				recordString = records.get(i);
-				// System.out.println("In for loop for thread " + threadID + " " + recordString);
-				
-				
 
+				//	for loop to print parse and write to file
 				for(int j = 0; j < columnList.size(); j++) {
-
-					writeString = writeString.concat(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "\t");				
-
+					outputFile.write(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "\t");
 				}
-
-				outputFile.write(writeString + "\n");
-				// outputFile.write("\n");
+				outputFile.write("\n");
 			}
-
-			System.out.println("Output file for thread " + threadID + " written!");
-
 			outputFile.close();
-
-
-
-			
 
 		} catch(Exception e) {
 			System.out.println("Error: " + e);
