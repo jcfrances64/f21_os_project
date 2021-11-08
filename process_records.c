@@ -40,7 +40,7 @@ void *printStatusReport(void *args) {
         pthread_mutex_lock(&mutex);
         pthread_cond_wait(&cv, &mutex);
 
-        printf("\n***Report***\n");
+        printf("***Report***\n");
         printf("%i records read for %i reports\n", reportCounts[0].totalRecordCount, reportCounts[0].threadCount);
         int i;
         for(i = 0; i < reportCounts[0].threadCount; i++) {
