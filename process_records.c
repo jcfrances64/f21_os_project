@@ -116,8 +116,8 @@ int main(int argc, char**argv)
 
         
         sbuf.mtype = 2;
-        // sbuf.record[0]=0;
-        strcpy(sbuf.record, "");
+        sbuf.record[0]=0;
+        // strcpy(sbuf.record, "");
         buf_length = strlen(sbuf.record) + sizeof(int)+1;//struct size without
         // Send a message.
         if((msgsnd(msqid, &sbuf, buf_length, IPC_NOWAIT)) < 0) {

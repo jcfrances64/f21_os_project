@@ -11,12 +11,12 @@
 int main(void) {
 
 
-    FILE *f = fopen("records.mini", "r");
+    // FILE *f = fopen("records.mini", "r");
 
-    char str[RECORD_FIELD_LENGTH];
+    // char str[RECORD_FIELD_LENGTH];
 
-    fgets(str, RECORD_FIELD_LENGTH, f);
-    printf("%s", str);
+    // fgets(str, RECORD_FIELD_LENGTH, f);
+    // printf("%s", str);
 
     // while(strlen(str) != 0 || index > 20) {
     //     printf("%i:     %s", index, str);
@@ -24,20 +24,24 @@ int main(void) {
     //     fgets(str, RECORD_FIELD_LENGTH, f);
 
     // }
-    int index = 0;
+    // int index = 0;
 
-    while(strcmp(str, "\n") != 0) {
-        if(strstr(str, "H Peck")) {
-            printf("**MATCH**\t%s", str);
-        } else {
-            printf("%s", str);
-        }
-        fgets(str, RECORD_FIELD_LENGTH, f);
-        index++;
-        if(index > 20) {
-            break;
-        }
-    }
+    // while(strcmp(str, "\n") != 0) {
+    //     if(strstr(str, "H Peck")) {
+    //         printf("**MATCH**\t%s", str);
+    //     } else {
+    //         printf("%s", str);
+    //     }
+    //     fgets(str, RECORD_FIELD_LENGTH, f);
+    //     index++;
+    //     if(index > 20) {
+    //         break;
+    //     }
+    // }
+
+    char test[81];
+    strcpy(test, "asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf");
+    printf("%s\n", test);
 
     // int i;
 

@@ -96,16 +96,13 @@ class ReportThread extends Thread {
 
 			String reportRecord;	// = MessageJNI.readReportRecord(1);
 
-			int j = 1;
+			// int j = 1;
 			// System.out.print(threadID + " Record: ");
 			reportRecord = MessageJNI.readReportRecord(threadID);
 			records.add(reportRecord);
-			System.out.println("Thread " + threadID + " " + reportRecord);
-			// while(reportRecord.length() > 1) {
-			for(int i = 0; i < 3; i++) {
-				// System.out.println(j + ": ThreadID: " + threadID + " - " + reportRecord);
-				j++;
-				// System.out.print(threadID + " Record: ");
+			// System.out.println("Thread " + threadID + " " + reportRecord);
+			while(reportRecord.length() > 1) {
+				// j++;
 				reportRecord = MessageJNI.readReportRecord(threadID);
 				if(!(reportRecord.length() > 1)) {
 					break;
@@ -117,59 +114,19 @@ class ReportThread extends Thread {
 		} catch (Exception e) {
 			System.err.println("Error: " + e);
 		}
-			// }	
-		// }
+	
+		
 
 		
 
 
 		String tempFileName = "Thread" + threadID + ".rpt"; //delete later and use the filename specified in report
 
-		// try {
-		// 	File outputFile = new File(tempFileName);
-		// 	if(outputFile.exists()) {
-		// 	}
-		// 	if(outputFile.createNewFile()) {
-		// 		// fprintf(stderr, "Report File: %s created\n" + outputFileName);
-		// 		System.out.println("Report File: " + tempFileName + " created\n" + outputFileName);
-		// 	} else {
-		// 		System.err.println("Error: File already exists\n");
-		// 		// throw new FileNotFoundException;
-		// 	}
-		// 	// outputFile.close();
-		// } catch(Exception e) {
-		// 	System.err.println("Error: " + e);
-		// }
-
 		
-		if(threadID == 2) {
-			System.out.println("columnList size " + columnList.size());
-			String testRecord = records.get(0);
-			System.out.println(testRecord);
-			for(int j = 0; j < columnList.size(); j++) {
-				System.out.println(j + " Left: " + columnList.get(j).leftBound + " Right: " + columnList.get(j).rightBound);
-			}
-			for(int i = 0; i < testRecord.length(); i++) {
-				System.out.println("Index: " + i +  " character: " + testRecord.charAt(i));
-			}
-			String writeString = "";
-			for(int j = 0; j < columnList.size(); j++) {
-
-				writeString = writeString.concat(testRecord.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound - 1) + "  ");
-				// writeString = writeString.concat("test");
-				// System.out.println(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(i).rightBound - 1));
-				// System.out.println("TID " + threadID+ " Left: " + columnList.get(j).leftBound + " Right: " + columnList.get(j).rightBound);
-
-				
-
-			}
-
-			System.out.println(testRecord.substring(columnList.get(0).leftBound - 1, columnList.get(0).rightBound));
-			System.out.println("Write String: " + writeString);
-		}
+		
 		
 		// write to file
-		/*
+		
 		try { //test commit
 			FileWriter outputFile = new FileWriter(tempFileName);	//	update later to include
 
@@ -193,19 +150,13 @@ class ReportThread extends Thread {
 			for(int i = 0; i < records.size(); i++) {
 				writeString = "";
 				recordString = records.get(i);
-				System.out.println("In for loop for thread " + threadID + " " + recordString);
+				// System.out.println("In for loop for thread " + threadID + " " + recordString);
 				
 				
 
 				for(int j = 0; j < columnList.size(); j++) {
 
-					writeString = writeString.concat(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "\t");
-					// outputFile.write(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "\t");
-					// writeString = writeString.concat("test");
-					// System.out.println(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(i).rightBound - 1));
-					// System.out.println("TID " + threadID+ " Left: " + columnList.get(j).leftBound + " Right: " + columnList.get(j).rightBound);
-
-					
+					writeString = writeString.concat(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "\t");				
 
 				}
 
@@ -223,7 +174,7 @@ class ReportThread extends Thread {
 
 		} catch(Exception e) {
 			System.out.println("Error: " + e);
-		} */
+		} 
 
 
 
