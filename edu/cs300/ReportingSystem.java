@@ -100,7 +100,9 @@ class ReportThread extends Thread {
 			// System.out.print(threadID + " Record: ");
 			reportRecord = MessageJNI.readReportRecord(threadID);
 			records.add(reportRecord);
-			while(reportRecord.length() > 1) {
+			System.out.println("Thread " + threadID + " " + reportRecord);
+			// while(reportRecord.length() > 1) {
+			for(int i = 0; i < 3; i++) {
 				// System.out.println(j + ": ThreadID: " + threadID + " - " + reportRecord);
 				j++;
 				// System.out.print(threadID + " Record: ");
@@ -125,11 +127,8 @@ class ReportThread extends Thread {
 
 		// try {
 		// 	File outputFile = new File(tempFileName);
-
 		// 	if(outputFile.exists()) {
-
 		// 	}
-
 		// 	if(outputFile.createNewFile()) {
 		// 		// fprintf(stderr, "Report File: %s created\n" + outputFileName);
 		// 		System.out.println("Report File: " + tempFileName + " created\n" + outputFileName);
@@ -138,14 +137,11 @@ class ReportThread extends Thread {
 		// 		// throw new FileNotFoundException;
 		// 	}
 		// 	// outputFile.close();
-
-
-
 		// } catch(Exception e) {
 		// 	System.err.println("Error: " + e);
 		// }
 
-		/** 
+		
 		if(threadID == 2) {
 			System.out.println("columnList size " + columnList.size());
 			String testRecord = records.get(0);
@@ -159,7 +155,7 @@ class ReportThread extends Thread {
 			String writeString = "";
 			for(int j = 0; j < columnList.size(); j++) {
 
-				writeString = writeString.concat(testRecord.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound) + "  ");
+				writeString = writeString.concat(testRecord.substring(columnList.get(j).leftBound - 1, columnList.get(j).rightBound - 1) + "  ");
 				// writeString = writeString.concat("test");
 				// System.out.println(recordString.substring(columnList.get(j).leftBound - 1, columnList.get(i).rightBound - 1));
 				// System.out.println("TID " + threadID+ " Left: " + columnList.get(j).leftBound + " Right: " + columnList.get(j).rightBound);
@@ -168,10 +164,12 @@ class ReportThread extends Thread {
 
 			}
 
-			System.out.println(testRecord.substring(columnList.get(0).leftBound - 1, columnList.get(0).rightBound - 1));
+			System.out.println(testRecord.substring(columnList.get(0).leftBound - 1, columnList.get(0).rightBound));
 			System.out.println("Write String: " + writeString);
-		} */
-
+		}
+		
+		// write to file
+		/*
 		try { //test commit
 			FileWriter outputFile = new FileWriter(tempFileName);	//	update later to include
 
@@ -225,7 +223,7 @@ class ReportThread extends Thread {
 
 		} catch(Exception e) {
 			System.out.println("Error: " + e);
-		}
+		} */
 
 
 

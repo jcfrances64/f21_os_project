@@ -95,9 +95,9 @@ int main(int argc, char**argv)
 
         do {
             fgets(record, RECORD_FIELD_LENGTH, recordFile);
-            if(strstr(record, "searchString") != 0) {
+            if(strstr(record, searchString) != 0) {
                 strcpy(sbuf.record, record);
-                printf("Entered if for thread%i\n", threadCount);
+                // printf("Entered if for thread%i\n", threadCount);
                 buf_length = strlen(sbuf.record) + sizeof(int) + 1;
                 sbuf.mtype = 2;
                 //  send message
@@ -110,6 +110,7 @@ int main(int argc, char**argv)
                 }
                 else
                     fprintf(stderr,"msgsnd-report_record: record\"%s\" Sent (%d bytes)\n", sbuf.record,(int)buf_length);
+                    // printf("Sent %s to thread %i\n", record, threadIndex);
             }
         } while(strcmp(record, "\n") != 0);
 

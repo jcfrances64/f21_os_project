@@ -1,19 +1,19 @@
-ReportingSystem.<init>():254 Starting Reporting System
-ReportingSystem.loadReportJobs():285 Load specs and create threads for each report
+ReportingSystem.<init>():252 Starting Reporting System
+ReportingSystem.loadReportJobs():283 Load specs and create threads for each report
 Start thread to request, process and print reports
-msgget: msgget succeeded: msgqid = 109543551
+msgget: msgget succeeded: msgqid = 138379362
  successfully sent
-JNI msgsnd-report_request: Record 2 of 2: search for Purchas...0x7fc4901361f8
-msgget: msgget succeeded: msgqid = 109543551
+JNI msgsnd-report_request: Record 2 of 2: search for Purchas...0x7f364812e1f8
+msgget: msgget succeeded: msgqid = 138379362
  successfully sent
-JNI msgsnd-report_request: Record 1 of 2: search for H Peck...0x7fc4901341f8
+JNI msgsnd-report_request: Record 1 of 2: search for H Peck...0x7f364812c1f8
 JNI msgrcv-report_rec: Report record:09/22/21  Wipers       Purchas H Peck      NA      $36   0     $0     $36  
- ret bytes rcv'd 81...0x7fc4901361f8
-JNI msgrcv-report_rec: Report record:09/23/21  Air Freshnr  Purchas J Thorn     SSmith  $12   0     $0     $12    
- ret bytes rcv'd 83...0x7fc4901361f8
-JNI msgrcv-report_rec: Report record: ret bytes rcv'd 5...0x7fc4901361f8
+ ret bytes rcv'd 81...0x7f364812e1f8
 JNI msgrcv-report_rec: Report record:09/22/21  Windshield   Repair  H Peck      JJDoe   $400  1.5   $60    $460   
- ret bytes rcv'd 83...0x7fc4901341f8
+ ret bytes rcv'd 83...0x7f364812c1f8
+JNI msgrcv-report_rec: Report record:09/23/21  Air Freshnr  Purchas J Thorn     SSmith  $12   0     $0     $12    
+ ret bytes rcv'd 83...0x7f364812e1f8
+JNI msgrcv-report_rec: Report record: ret bytes rcv'd 5...0x7f364812e1f8
 JNI msgrcv-report_rec: Report record:09/22/21  Wipers       Purchas H Peck      NA      $36   0     $0     $36  
- ret bytes rcv'd 81...0x7fc4901341f8
-JNI msgrcv-report_rec: Report record: ret bytes rcv'd 5...0x7fc4901341f8
+ ret bytes rcv'd 81...0x7f364812c1f8
+JNI msgrcv-report_rec: Report record: ret bytes rcv'd 5...0x7f364812c1f8
