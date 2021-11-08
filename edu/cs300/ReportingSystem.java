@@ -12,12 +12,10 @@ import java.util.concurrent.*;
 class Column {
 	int leftBound;
 	int rightBound;
-	// String leftBound;
-	// String rightBound;
 	String columnName;
 }
 
-class ReportThread extends Thread {
+class ReportGenerator extends Thread {
 
 	private int threadID;
 	int reportCount;	//	same as index as specified in the pdf
@@ -30,12 +28,9 @@ class ReportThread extends Thread {
 	Vector<Column> columnList = new Vector<Column>();
 	Vector<String> records = new Vector<String>();
 
-	// static {
-	// 	System.loadLibrary("system5msg");
-	// }
 
 
-	public ReportThread(int threadID, int reportCount, String filePath) {
+	public ReportGenerator(int threadID, int reportCount, String filePath) {
 		this.threadID = threadID;
 		this.reportCount = reportCount;
 		this.filePath = filePath;
@@ -76,7 +71,6 @@ class ReportThread extends Thread {
 
 				columnList.add(newColumn); // report parameter to vector
 
-				// index++;
 			}	
 
 		} catch (FileNotFoundException ex) {
@@ -151,14 +145,7 @@ class ReportThread extends Thread {
 
 public class ReportingSystem {
 
-	// @Override
-	// public void run(String filePath) {
-		
-
-
-
-	// }
-	public ReportingSystem() {
+	ReportingSystem() {
 		DebugLog.log("Starting Reporting System");
 	}
 
@@ -178,7 +165,7 @@ public class ReportingSystem {
 				for(int i = 0; i < processCount; i++) {
 					if(reportList.hasNextLine()) {
 						String fileName = reportList.nextLine();
-						ReportThread thread = new ReportThread(i + 1, reportCounter, fileName);
+						ReportGenerator thread = new ReportGenerator(i + 1, reportCounter, fileName);
 						thread.start();
 					} else {
 						System.out.println("Error in report_list.txt file");
