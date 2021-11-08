@@ -10,6 +10,27 @@
 
 int main(void) {
 
+    // char fileName[100];
+    // int i;
+    // for(i = 0; i < 5; i++) {
+    //     fgets(fileName, 100, stdin);
+    //     // scanf("%s", fileName);
+    //     printf("%s\n", fileName);  
+    // }
+    
+    if(0 % 10 == 0) {
+        printf("yes\n");
+    }
+
+    
+
+    // int index = 0;
+    // while((fileName[index]=getChar()) != EOF) {
+
+    // }
+
+    // printf("%s\n", fileName);
+
 
     // FILE *f = fopen("records.mini", "r");
 

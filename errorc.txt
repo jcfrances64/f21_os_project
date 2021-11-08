@@ -1,5 +1,5 @@
-msgget: msgget succeeded: msgqid = 153714755
-msgget: msgget succeeded: msgqid = 153714755
+msgget: msgget succeeded: msgqid = 158761027
+msgget: msgget succeeded: msgqid = 158761027
 Error initializing count structure
 msgget: msgget succeeded: msgqid = 150241452
 msgsnd-report_record: record"09/22/21  Windshield   Repair  H Peck      JJDoe   $400  1.5   $60    $460   
