@@ -101,7 +101,7 @@ class ReportThread extends Thread {
 			reportRecord = MessageJNI.readReportRecord(threadID);
 			records.add(reportRecord);
 			// System.out.println("Thread " + threadID + " " + reportRecord);
-			while(reportRecord.length() > 1) {
+			while(reportRecord != null) {
 				// j++;
 				reportRecord = MessageJNI.readReportRecord(threadID);
 				if(!(reportRecord.length() > 1)) {
